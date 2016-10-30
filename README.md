@@ -4,9 +4,9 @@ Do you select text while reading? This Google Chrome extension tells you how "pe
 
 Example:
 
-Perfect!
+Perfect!<br/>
 ![Perfect!](https://github.com/glgh/perfect-reader/blob/master/example/example-hit.png)
 
-Need Improvement.
+Need Improvement.<br/>
 ![Need Improvement](https://github.com/glgh/perfect-reader/blob/master/example/example-miss.png)
 
