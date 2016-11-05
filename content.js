@@ -17,7 +17,13 @@ function getSelectionEnds() {
     return {success: success, x1: x1, y1: y1, x2: x2, y2: y2};
 }
 
+// A side note: use event listener, not inline event handlers (e.g., "onclick")
+// new inline events could overwrite any existing inline event handlers
 
 document.addEventListener("mouseup", function(event) {
+    chrome.runtime.sendMessage(getSelectionEnds(), function(response) {});
+});
+
+window.addEventListener("resize", function(event) {
     chrome.runtime.sendMessage(getSelectionEnds(), function(response) {});
 });
