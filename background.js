@@ -6,8 +6,8 @@ const ICON_HIT = "hit.png";
 const ICON_MISS = "miss.png";
 
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        var dx = Math.abs(request.x1 - request.x2);
+    function(message, sender, sendResponse) {
+        var dx = Math.abs(message.x1 - message.x2);
         var badge_text, badge_color, status_icon;
         if (dx < THRESHOLD_HIT) {
             badge_text = "0";
@@ -22,9 +22,12 @@ chrome.runtime.onMessage.addListener(
             badge_color = COLOR_MISS;
             status_icon = ICON_MISS;
         }
-        chrome.browserAction.setBadgeText({text: badge_text});
-        chrome.browserAction.setBadgeBackgroundColor({color: badge_color});
-        chrome.browserAction.setIcon({path: status_icon});
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+            var tab = tabs[0]
+            chrome.browserAction.setBadgeText({text: badge_text, tabId: tab.id});
+            chrome.browserAction.setBadgeBackgroundColor({color: badge_color, tabId: tab.id});
+            chrome.browserAction.setIcon({path: status_icon, tabId: tab.id});
+        });
 
     }
 );
