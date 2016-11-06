@@ -33,6 +33,10 @@ document.addEventListener("mouseup", function(event) {
     sendSelectionStatus();
 });
 
+document.addEventListener("keyup", function(event) {
+    sendSelectionStatus();
+});
+
 window.addEventListener("resize", function(event) {
     sendSelectionStatus();
 });
