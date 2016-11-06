@@ -14,16 +14,25 @@ function getSelectionEnds() {
             y2 = rect_last.bottom;
         }
     }
-    return {success: success, x1: x1, y1: y1, x2: x2, y2: y2};
+    return {success: success, isCollapsed: sel.isCollapsed, x1: x1, y1: y1, x2: x2, y2: y2};
+}
+
+function sendSelectionStatus() {
+    // when an already selected area is clicked, the mouseup event will be fired
+    // before deselection is resolved
+    // this returns an incorrect isCollapsed value
+    // so use a 0ms timeout to wait for (possible) deselction to finish
+    setTimeout(function(){
+        chrome.runtime.sendMessage(getSelectionEnds(), function(response) {});
+    }, 0);
 }
 
 // A side note: use event listener, not inline event handlers (e.g., "onclick")
 // new inline events could overwrite any existing inline event handlers
-
 document.addEventListener("mouseup", function(event) {
-    chrome.runtime.sendMessage(getSelectionEnds(), function(response) {});
+    sendSelectionStatus();
 });
 
 window.addEventListener("resize", function(event) {
-    chrome.runtime.sendMessage(getSelectionEnds(), function(response) {});
+    sendSelectionStatus();
 });
