@@ -1,11 +1,13 @@
+"use strict";
+
 const THRESHOLD_HIT = 0.1;    //less than threshold: considered hit
 const THRESHOLD_DECIMAL = 10; //less than threshold: show one digit decimal
 const COLOR_HIT = "SeaGreen";
 const COLOR_MISS = "Crimson";
 const COLOR_DEFAULT = "Black";
-const ICON_HIT = "hit.png";
-const ICON_MISS = "miss.png";
-const ICON_DEFAULT = "icon.png";
+const ICON_HIT = "images/hit.png";
+const ICON_MISS = "images/miss.png";
+const ICON_DEFAULT = "images/icon.png";
 
 // Note: chrome.runtime.onMessage only receive message from *this* erxtension
 chrome.runtime.onMessage.addListener(
